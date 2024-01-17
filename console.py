@@ -307,7 +307,7 @@ def do_create(self, args):
                 att_val = args[2][1:args[2].find('\"', 1)]
 
             # if att_val was not quoted arg
-            if  (!(att_val) and args[2]):
+            if  ((not(att_val)) and args[2]):
                 att_val = args[2].partition(' ')[0]
 
             args = [att_name, att_val]
