@@ -5,7 +5,7 @@
 # import Flask class from flask module
 from flask import Flask
 
-# creates an instance called app of the class by passong the __name__ variable
+# creates instance call app of the class by pass the __name__ variable
 appc = Flask(__name__)
 appc.url_map.strict_slashes = False
 
@@ -25,17 +25,17 @@ def hbnb_route():
     """display "HBNB"
 
     Return:
-        str: text the page
+        str: texte on the page
     """
     return 'HBNB'
 
 
 @appc.route('/c/<text>')
 def c_route(text):
-    """displays "C", follow by the value of the text variable
+    """displaye "C", follow by the value of the text variable
 
     Args:
-        texte (str): text to serv on the page
+        text (str): text to be serve on the page
 
     Return:
         str: text on the page
@@ -43,18 +43,31 @@ def c_route(text):
     return 'C {}'.format(text.replace('_', ' '))
 
 
-@appc.route('/python', default={'text': 'is cool'})
+@appc.route('/python', defaults={'text': 'is cool'})
 @appc.route('/python/<text>')
 def python_route(text):
-    """display "Python", follow by the value of the text variable
+    """displays "Python", followed by the value of the text variable
 
     Args:
-        texte (str): text to be serve on the page
+        text (str): text to be served on the page
 
-    Return:
-        str: texte  the page
+    Returns:
+        str: text on the page
     """
     return 'Python {}'.format(text.replace('_', ' '))
+
+
+@appc.route('/number/<int:n>')
+def number_route(n):
+    """display "n is a number" only if n is  integer
+
+    Args:
+        n (integer): number to be display on page
+
+    Return:
+        str: text on the page
+    """
+    return '{} is a number'.format(n)
 
 
 if __name__ == '__main__':
