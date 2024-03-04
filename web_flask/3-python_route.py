@@ -1,61 +1,35 @@
 #!/usr/bin/python3
-"""script that start a Flask web application"""
+"""
+start Flask web applications
+"""
 
-
-# import Flask class from flask module
 from flask import Flask
-
-# creates an instance called app of the class by passong the __name__ variable
-appc = Flask(__name__)
-appc.url_map.strict_slashes = False
+app = Flask(__name__)
 
 
-@appc.route('/')
+@app.route('/', strict_slashes=False)
 def index():
-    """display "Hello HBNB!"
-
-    Return:
-        str: text on the indexe page
-    """
+    """returns Hello HBNB!"""
     return 'Hello HBNB!'
 
 
-@appc.route('/hbnb')
-def hbnb_route():
-    """display "HBNB"
-
-    Return:
-        str: text the page
-    """
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
+    """returns HBNB"""
     return 'HBNB'
 
 
-@appc.route('/c/<text>')
-def c_route(text):
-    """displays "C", follow by the value of the text variable
-
-    Args:
-        texte (str): text to serv on the page
-
-    Return:
-        str: text on the page
-    """
-    return 'C {}'.format(text.replace('_', ' '))
+@app.route('/c/<text>', strict_slashes=False)
+def cisfun(text):
+    """display “C ” followed by the value of the text variable"""
+    return 'C ' + text.replace('_', ' ')
 
 
-@appc.route('/python', default={'text': 'is cool'})
-@appc.route('/python/<text>')
-def python_route(text):
-    """display "Python", follow by the value of the text variable
-
-    Args:
-        texte (str): text to be serve on the page
-
-    Return:
-        str: texte  the page
-    """
-    return 'Python {}'.format(text.replace('_', ' '))
-
+@app.route('/python', strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def pythoniscool(text='is cool'):
+    """display “Python ”, followed by the value of the text variable"""
+    return 'Python ' + text.replace('_', ' ')
 
 if __name__ == '__main__':
-    appc.run(debug=True)
+    app.run(host='0.0.0.0', port='5000')

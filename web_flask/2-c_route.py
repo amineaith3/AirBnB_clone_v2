@@ -1,47 +1,28 @@
 #!/usr/bin/python3
-"""script that start Flask web application"""
+"""
+start a Flask web applications
+"""
 
-
-# import Flask class from flask module
 from flask import Flask
-
-# creates an instance called app of the class by pass the __name__ variable
-appc = Flask(__name__)
-appc.url_map.strict_slashes = False
+app = Flask(__name__)
 
 
-@appc.route('/')
+@app.route('/', strict_slashes=False)
 def index():
-    """display "Hello HBNB!"
-
-    Return:
-        str: text on indexe page
-    """
+    """returns Hello HBNB!"""
     return 'Hello HBNB!'
 
 
-@appc.route('/hbnb')
-def hbnb_route():
-    """displays "HBNB
-
-    Return:
-        str: text on the page
-    """
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
+    """returns HBNB"""
     return 'HBNB'
 
 
-@appc.route('/c/<text>')
-def c_route(text):
-    """display "C", follow by the value of the texte variable
-
-    Args:
-        text (str): text to be serve the page
-
-    Return:
-        str: text on the page
-    """
-    return 'C {}'.format(text.replace('_', ' '))
-
+@app.route('/c/<text>', strict_slashes=False)
+def cisfun(text):
+    """display “C ” followed by the value of the text variable"""
+    return 'C ' + text.replace('_', ' ')
 
 if __name__ == '__main__':
-    appc.run(debug=True)
+    app.run(host='0.0.0.0', port='5000')
